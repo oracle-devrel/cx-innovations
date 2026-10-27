@@ -14,22 +14,35 @@ changed rows through an Oracle REST batch request.
 The add-in supports product-group revenue items only. It does not delete items or check for
 concurrent edits, so reload an opportunity before changing it if other users may have updated it.
 
-This repository provides reference code. `package.json` contains project metadata only, and no
-npm dependency declarations or lockfile are distributed. To run or adapt the sample, supply the
-libraries and development tools listed below in your own project.
+This sample includes dependency declarations and npm commands for installing,
+testing, building, and running the add-in. Repository-wide contribution and security policies
+are linked below.
 
-## Use the sample
+## Getting started
 
 You need Node.js 22.15 or newer, npm, an Excel client that supports ExcelApi 1.8, and access to an
 Oracle CX Sales environment or compatible gateway. Your Oracle user must be able to read
 opportunities, product groups, and revenue items; creating or updating rows also requires write
 and batch-request access.
 
-Set up the referenced libraries in your own development environment. The examples in
-[webpack.config.js](webpack.config.js), [app.js](app.js), and
-[scripts/dev-server.js](scripts/dev-server.js) show how to build and host the add-in over HTTPS on
-port 8443. Sideload [manifest.xml](manifest.xml) into Excel using your Office development tooling,
-and trust the local development certificate if prompted.
+From the repository root, install the dependencies and run the automated tests and build:
+
+```sh
+cd cx-excel-plugin
+npm install
+npm test
+npm run build
+npm start
+```
+
+`npm start` builds a development bundle and serves the add-in over HTTPS on port 8443.
+The Office development certificate tooling may prompt you to trust a local certificate.
+Sideload [manifest.xml](manifest.xml) into Excel using Microsoft's
+[Office add-in sideloading instructions](https://learn.microsoft.com/office/dev/add-ins/testing/test-debug-office-add-ins).
+The host and build examples are in [app.js](app.js), [webpack.config.js](webpack.config.js),
+and [scripts/dev-server.js](scripts/dev-server.js).
+
+## Usage examples
 
 In a blank workbook, open **Home → CX Sales**, then:
 
@@ -49,17 +62,16 @@ Direct Oracle REST access requires CORS permission for the exact add-in origin (
 instead. Revenue-item responses must preserve each item's `self` or `canonical` link so updates
 use the server-issued resource key.
 
-## Referenced npm libraries and tools
+## Libraries and tools
 
-The following packages are referenced for adapting and running the sample. Select compatible
-versions and declare them in your own project's dependency manifest.
+[package.json](package.json) declares the runtime and development dependencies.
+Install them with `npm install`.
 
 - `express` serves the add-in assets and public configuration in the hosting example.
 - `webpack` and `webpack-cli` build the JavaScript bundles.
 - `copy-webpack-plugin` and `html-webpack-plugin` copy assets and generate the HTML pages.
 - `office-addin-dev-certs` manages local HTTPS certificates.
-- `office-addin-debugging` is optional tooling for starting, stopping, and sideloading the add-in.
-- `office-addin-manifest` is optional tooling for validating the add-in manifest.
+- `office-addin-manifest` validates the add-in manifest.
 
 The Office.js library is loaded from Microsoft's CDN rather than installed through npm.
 
@@ -95,12 +107,12 @@ authentication, use a customer-controlled gateway that keeps upstream credential
 
 ## Verify and deploy
 
-After supplying the referenced libraries in your development environment, the example commands are:
+From the sample directory, run:
 
 ```sh
-node --test
-npx webpack --mode production
-npx office-addin-manifest validate manifest.xml
+npm test
+npm run build
+npm run validate
 ```
 
 The build writes static assets to `dist/`. Manifest validation calls Microsoft's service and
@@ -108,7 +120,7 @@ requires network access. An end-to-end test also needs a nonproduction Oracle te
 load, create, update, authentication failure, and CORS failure before deployment.
 
 For production, host `dist/` at a stable HTTPS URL. Copy `manifest.xml` for the deployment,
-replace the `https://localhost:8443` asset URLs and sample metadata, and validate the copy. Keep
+replace the `https://localhost:8443` asset URLs and sample metadata, and validate the copy with `npx office-addin-manifest validate path/to/manifest.xml`. Keep
 the add-in ID stable across releases; leave the local manifest unchanged for local development.
 Changing `CX_API_ENVIRONMENT_URL` does not change manifest asset URLs.
 
@@ -127,9 +139,24 @@ Changing `CX_API_ENVIRONMENT_URL` does not change manifest asset URLs.
 
 This project is licensed under the Universal Permissive License, Version 1.0; see
 [LICENSE.txt](LICENSE.txt). Attributions for the included third-party material are in
-[THIRD_PARTY_LICENSES.txt](THIRD_PARTY_LICENSES.txt). The npm library and tool references are listed
-only in this README; their packages and generated build output are not included in the repository.
+[THIRD_PARTY_LICENSES.txt](THIRD_PARTY_LICENSES.txt). Installed dependency directories and
+generated build output are not included in the repository.
 
 Before publishing a fork, confirm that you may distribute the bundled Oracle branding assets or
 replace them. Review the Git history for old environment hostnames or deployment targets; removing
 them from the current files does not remove them from prior commits.
+
+## How to contribute
+
+Read the repository [contribution guide](../CONTRIBUTING.md) for the Oracle Contributor
+Agreement, commit sign-off requirements, and pull request process. Contributions to tests,
+examples, accessibility, and documentation are welcome.
+
+## Security
+
+Do not report security vulnerabilities in public GitHub issues or pull requests. Follow
+[SECURITY.md](../SECURITY.md) to report them privately to Oracle Security.
+
+## Disclaimer
+
+ORACLE AND ITS AFFILIATES DO NOT PROVIDE ANY WARRANTY WHATSOEVER, EXPRESS OR IMPLIED, FOR ANY SOFTWARE, MATERIAL OR CONTENT OF ANY KIND CONTAINED OR PRODUCED WITHIN THIS REPOSITORY, AND IN PARTICULAR SPECIFICALLY DISCLAIM ANY AND ALL IMPLIED WARRANTIES OF TITLE, NON-INFRINGEMENT, MERCHANTABILITY, AND FITNESS FOR A PARTICULAR PURPOSE.  FURTHERMORE, ORACLE AND ITS AFFILIATES DO NOT REPRESENT THAT ANY CUSTOMARY SECURITY REVIEW HAS BEEN PERFORMED WITH RESPECT TO ANY SOFTWARE, MATERIAL OR CONTENT CONTAINED OR PRODUCED WITHIN THIS REPOSITORY.  IN ADDITION, AND WITHOUT LIMITING THE FOREGOING, THIRD PARTIES MAY HAVE POSTED SOFTWARE, MATERIAL OR CONTENT TO THIS REPOSITORY WITHOUT ANY REVIEW. USE AT YOUR OWN RISK. 

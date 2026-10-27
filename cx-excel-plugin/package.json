@@ -8,7 +8,22 @@
   "engines": {
     "node": ">=22.15.0"
   },
-  "copyright": "Copyright (c) 2026, Oracle and/or its affiliates."
+  "copyright": "Copyright (c) 2026, Oracle and/or its affiliates.",
+  "scripts": {
+    "test": "node --test",
+    "build": "webpack --mode production",
+    "start": "node scripts/dev-server.js",
+    "validate": "office-addin-manifest validate manifest.xml"
+  },
+  "dependencies": {
+    "express": "5.2.1"
+  },
+  "devDependencies": {
+    "copy-webpack-plugin": "14.0.0",
+    "html-webpack-plugin": "5.6.8",
+    "office-addin-dev-certs": "3.0.1",
+    "office-addin-manifest": "3.0.1",
+    "webpack": "5.106.2",
+    "webpack-cli": "7.2.3"
+  }
 }
-
-
