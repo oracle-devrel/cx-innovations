@@ -1,0 +1,128 @@
+<!doctype html>
+<!--
+** CX Sales Excel Add-in version 1.0.
+**
+** Copyright (c) 2026, Oracle and/or its affiliates.
+** Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl/
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CX Sales</title>
+    <link href="taskpane.css" rel="stylesheet" type="text/css" />
+    <script src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
+  </head>
+  <body>
+    <header class="header">
+      <img id="brand-logo" class="logo" src="assets/oracle-o-icon-80.png" alt="" />
+      <h1 id="app-title">CX Sales</h1>
+    </header>
+
+    <main id="app-body" class="content" hidden>
+      <section id="connection-section" class="panel">
+        <h2>Connect</h2>
+        <form id="connection-form" autocomplete="off">
+          <label for="environment-url">Environment URL</label>
+          <input
+            id="environment-url"
+            name="environmentUrl"
+            type="url"
+            placeholder="https://your-pod.example.com"
+            autocomplete="url"
+            required
+          />
+
+          <label for="auth-mode">Authentication</label>
+          <select id="auth-mode" name="authMode">
+            <option value="basic">Username and password</option>
+            <option value="bearer">Bearer access token</option>
+          </select>
+
+          <div id="basic-credentials" class="field-group">
+            <label for="username">Username</label>
+            <input id="username" name="username" type="text" autocomplete="off" />
+
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" autocomplete="new-password" />
+          </div>
+
+          <div id="bearer-credentials" class="field-group" hidden>
+            <label for="access-token">Access token</label>
+            <textarea
+              id="access-token"
+              name="accessToken"
+              rows="3"
+              autocomplete="off"
+              spellcheck="false"
+            ></textarea>
+          </div>
+
+          <p id="connection-error" class="error" role="alert"></p>
+
+          <div class="button-row">
+            <button id="connect-button" type="submit" class="primary">Connect</button>
+            <button id="reset-button" type="button">Reset</button>
+          </div>
+        </form>
+      </section>
+
+      <section id="loader-section" class="loader-container" hidden>
+        <div class="loader" aria-hidden="true"></div>
+        <p id="loader-message">Connecting…</p>
+      </section>
+
+      <section id="revenue-section" class="panel" hidden>
+        <div class="section-heading">
+          <h2>Opportunity</h2>
+          <button id="disconnect-button" type="button" class="link-button">
+            Change connection
+          </button>
+        </div>
+
+        <label for="opportunity-select">Opportunity</label>
+        <select id="opportunity-select" disabled>
+          <option value="">Loading opportunities…</option>
+        </select>
+
+        <dl class="opportunity-details">
+          <div>
+            <dt>Account</dt>
+            <dd id="opportunity-account">—</dd>
+          </div>
+          <div>
+            <dt>Amount</dt>
+            <dd id="opportunity-amount">—</dd>
+          </div>
+          <div>
+            <dt>Sales stage</dt>
+            <dd id="opportunity-sales-stage">—</dd>
+          </div>
+          <div>
+            <dt>Win probability</dt>
+            <dd id="opportunity-win-probability">—</dd>
+          </div>
+          <div>
+            <dt>Close date</dt>
+            <dd id="opportunity-close-date">—</dd>
+          </div>
+        </dl>
+
+        <h2>Revenue items</h2>
+        <div class="button-row">
+          <button id="load-button" type="button" class="primary" disabled>Load into Excel</button>
+          <button id="sync-button" type="button" disabled>Sync changes</button>
+          <button id="view-button" type="button" hidden disabled>Open opportunity</button>
+        </div>
+
+        <p id="status-message" class="status" role="status" aria-live="polite"></p>
+
+        <details id="debug-section" hidden>
+          <summary>Debug response</summary>
+          <textarea id="debug-response" rows="12" readonly spellcheck="false"></textarea>
+        </details>
+      </section>
+    </main>
+  </body>
+</html>

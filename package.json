@@ -1,0 +1,14 @@
+{
+  "$comment": "/*\n** CX Sales Excel Add-in version 1.0.\n**\n** Copyright (c) 2026, Oracle and/or its affiliates.\n** Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl/\n*/",
+  "name": "cx-sales-excel-add-in",
+  "version": "1.0.0",
+  "description": "Configurable Excel add-in for Oracle CX Sales opportunity revenue items.",
+  "private": true,
+  "license": "UPL-1.0",
+  "engines": {
+    "node": ">=22.15.0"
+  },
+  "copyright": "Copyright (c) 2026, Oracle and/or its affiliates."
+}
+
+

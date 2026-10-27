@@ -1,0 +1,148 @@
+{
+  "$comment": "/*\n** CX Sales Excel Add-in version 1.0.\n**\n** Copyright (c) 2026, Oracle and/or its affiliates.\n** Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl/\n*/",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/cx-sales-excel-add-in/config.schema.json",
+  "title": "CX Sales Excel Add-in runtime configuration",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "api": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "environmentUrl": {
+          "type": "string",
+          "description": "Oracle CX Sales or compatible gateway origin. Never include credentials."
+        },
+        "restPath": {
+          "type": "string",
+          "pattern": "^/"
+        },
+        "frameworkVersion": {
+          "type": "string"
+        },
+        "requestTimeoutMs": {
+          "type": "integer",
+          "minimum": 1000,
+          "maximum": 120000
+        },
+        "pageSize": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 500
+        },
+        "opportunityLimit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "productGroupLimit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "revenueItemLimit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        }
+      }
+    },
+    "auth": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "enum": ["basic", "bearer"]
+        },
+        "allowModeSelection": {
+          "type": "boolean"
+        }
+      }
+    },
+    "resources": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "opportunities": {
+          "type": "string",
+          "pattern": "^/"
+        },
+        "productGroups": {
+          "type": "string",
+          "pattern": "^/"
+        },
+        "productGroupIdField": {
+          "type": "string",
+          "pattern": "^[A-Za-z_][A-Za-z0-9_]*$"
+        },
+        "productGroupNameField": {
+          "type": "string",
+          "pattern": "^[A-Za-z_][A-Za-z0-9_]*$"
+        },
+        "revenueItems": {
+          "type": "string",
+          "pattern": "^/.*\\{opportunityNumber\\}"
+        }
+      }
+    },
+    "workbook": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "worksheetName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 31
+        },
+        "maxRows": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "numberFormat": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "sync": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "extraRevenueFields": {
+          "type": "object",
+          "description": "Optional nonsecret, tenant-specific fields merged into create/update payloads.",
+          "additionalProperties": true
+        }
+      }
+    },
+    "ui": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "logoPath": {
+          "type": "string"
+        },
+        "showDebug": {
+          "type": "boolean"
+        },
+        "opportunityUrlTemplate": {
+          "type": "string",
+          "description": "Optional HTTPS URL containing {opportunityId} or {opportunityNumber}."
+        }
+      }
+    },
+    "$comment": {
+      "type": "string",
+      "description": "Oracle UPL 1.0 license notice for this configuration file."
+    }
+  }
+}

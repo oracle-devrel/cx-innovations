@@ -1,0 +1,39 @@
+{
+  "$comment": "/*\n** CX Sales Excel Add-in version 1.0.\n**\n** Copyright (c) 2026, Oracle and/or its affiliates.\n** Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl/\n*/",
+  "$schema": "./config.schema.json",
+  "api": {
+    "environmentUrl": "",
+    "restPath": "/crmRestApi/resources/11.13.18.05",
+    "frameworkVersion": "4",
+    "requestTimeoutMs": 30000,
+    "pageSize": 100,
+    "opportunityLimit": 25,
+    "productGroupLimit": 500,
+    "revenueItemLimit": 500
+  },
+  "auth": {
+    "mode": "basic",
+    "allowModeSelection": true
+  },
+  "resources": {
+    "opportunities": "/opportunities",
+    "productGroups": "/setupSalesCatalogs",
+    "productGroupIdField": "ProdGroupId",
+    "productGroupNameField": "ProdGroupName",
+    "revenueItems": "/opportunities/{opportunityNumber}/child/ChildRevenue"
+  },
+  "workbook": {
+    "worksheetName": "CX Revenue Items",
+    "maxRows": 500,
+    "numberFormat": "#,##0.00"
+  },
+  "sync": {
+    "extraRevenueFields": {}
+  },
+  "ui": {
+    "title": "CX Sales",
+    "logoPath": "assets/oracle-o-icon-80.png",
+    "showDebug": false,
+    "opportunityUrlTemplate": ""
+  }
+}

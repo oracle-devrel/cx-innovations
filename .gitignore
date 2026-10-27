@@ -1,0 +1,24 @@
+# CX Sales Excel Add-in version 1.0.
+#
+# Copyright (c) 2026, Oracle and/or its affiliates.
+# Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl/
+
+node_modules/
+/package-lock.json
+dist/
+.DS_Store
+/.dockerignore
+/.vscode/
+/.nvmrc
+/.npmrc
+*.log
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+coverage/
+config.local.json
+manifest.generated.xml
+manifest.production.xml
