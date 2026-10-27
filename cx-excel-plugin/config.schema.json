@@ -1,5 +1,5 @@
 {
-  "$comment": "/*\n** CX Sales Excel Add-in version 1.0.\n**\n** Copyright (c) 2026, Oracle and/or its affiliates.\n** Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl/\n*/",
+  "$comment": "/*\n** CX Sales Excel Add-in version 1.0.\n**\n** Copyright (c) 2026 Oracle and/or its affiliates.\n** Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl/\n*/",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.invalid/cx-sales-excel-add-in/config.schema.json",
   "title": "CX Sales Excel Add-in runtime configuration",
